@@ -11,7 +11,11 @@ extends CharacterBody3D
 # Y behaves normally, since that is in the plane of the cylinder
 # Cylinder is along X and Z, since we're using physics we need a restitution
 # "force" to push the characters back onto the cylinder.
+# (We're using character body 2D so we don't really need a "force" but just
+# velocity to achieve this)
+# The direction of the corrective motion is towards the Y axis
 
 
 func _physics_process(delta):
+    var y_ref = Vector3(0, position.y, 0)
     pass

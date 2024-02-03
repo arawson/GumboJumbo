@@ -10,7 +10,9 @@ config_version=5
 
 [application]
 
-config/name="C:\\MiniProjects"
+config/name="Gumbo Jumbo"
+config/description="Oh no, a witch has shrunken you and your spaceship! Shoot your way out of the gumbo she is brewing!"
+config/version="0.0.1"
 run/main_scene="res://GumboJumbo/gumbo_jumbo.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://gfx/alchemy-or-witchs-cauldrons/002-alchemy-orange.png"
