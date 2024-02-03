@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgn14uj654k16"]
+
+[ext_resource type="Texture2D" uid="uid://6k1hvmi7jqmt" path="res://GumboJumbo/Food/Yes/onion_01.png" id="1_ddcn1"]
+[ext_resource type="Script" path="res://GumboJumbo/onion_character.gd" id="1_s2r32"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_aoqf7"]
+height = 0.328696
+radius = 2.48528
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lcv83"]
+radius = 0.129021
+
+[node name="GumboJumbo" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.50478)
+
+[node name="CylinderStage" type="CSGCylinder3D" parent="."]
+radius = 1.63573
+sides = 32
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="BoundaryTop" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16973, 0)
+shape = SubResource("CylinderShape3D_aoqf7")
+
+[node name="BoundaryBottom" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.16848, 0)
+shape = SubResource("CylinderShape3D_aoqf7")
+
+[node name="OnionCharacter" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.68035)
+script = ExtResource("1_s2r32")
+
+[node name="Onion" type="Sprite3D" parent="OnionCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("1_ddcn1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OnionCharacter"]
+shape = SubResource("SphereShape3D_lcv83")
