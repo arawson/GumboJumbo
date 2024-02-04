@@ -5,6 +5,7 @@ extends CharacterBody3D
 
 
 @export var cylinder_radius: float
+@export var speed_max: float
 
 
 # Movement
@@ -16,6 +17,36 @@ extends CharacterBody3D
 # The direction of the corrective motion is towards the Y axis
 
 
-func _physics_process(delta):
-    var y_ref = Vector3(0, position.y, 0)
-    pass
+func _physics_process(_delta):
+	var y_ref = Vector3(0, position.y, 0)
+	var p_inward = (position - y_ref).normalized()
+	var v_input = Vector2.ZERO
+	var v_tangent = Vector3.ZERO
+
+	if Input.is_action_pressed("move_left"):
+		v_input.x += 1
+	if Input.is_action_pressed("move_right"):
+		v_input.x -= 1
+	if Input.is_action_pressed("move_up"):
+		v_input.y += 1
+	if Input.is_action_pressed("move_down"):
+		v_input.y -= 1
+
+	# v_tangent is the axis of our left-right motion
+	v_tangent = (position - y_ref).normalized().cross(Vector3(0, 1, 0))
+
+	velocity = v_tangent * v_input.x * speed_max \
+		+ Vector3(0, 1, 0) * v_input.y * speed_max
+
+	# or I could cheat and move_and_slide twice, once for the motion
+	# and again to push it back onto the cylinder
+	if move_and_slide():
+		# TODO check for collisions
+		pass
+
+	var r_error = cylinder_radius - (y_ref.distance_to(position))
+	velocity = r_error * p_inward
+	# disregard this move and slide's collisions!
+	move_and_slide()
+	
+	look_at(y_ref)
