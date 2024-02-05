@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://did8p76bbwiry"
-path.s3tc="res://.godot/imported/M484BulletCollection1.png-6a7479754a13125e6fcfaf8c74d50225.s3tc.ctex"
+uid="uid://b7u8j1pvvydhx"
+path.s3tc="res://.godot/imported/pulses.png-b385530ec11af3701151fe06dfd9547b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://gfx/bullet-collection-1_m484/M484BulletCollection1.png"
-dest_files=["res://.godot/imported/M484BulletCollection1.png-6a7479754a13125e6fcfaf8c74d50225.s3tc.ctex"]
+source_file="res://gfx/bullet-collection-1_m484/pulses.png"
+dest_files=["res://.godot/imported/pulses.png-b385530ec11af3701151fe06dfd9547b.s3tc.ctex"]
 
 [params]
 
