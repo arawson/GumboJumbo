@@ -1,14 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmfm6lwu4twaf"]
+[gd_scene load_steps=5 format=3 uid="uid://dmfm6lwu4twaf"]
 
 [ext_resource type="Script" path="res://GumboJumbo/bullets/pulse.gd" id="1_l0tbn"]
+[ext_resource type="Texture2D" uid="uid://cu8ymi6mjc5bi" path="res://gfx/bullet-collection-1_m484/pulse-red.png" id="2_if24d"]
+[ext_resource type="Script" path="res://GumboJumbo/lib/unit.gd" id="3_hcpxk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wq0hq"]
+radius = 0.0506049
 
 [node name="Pulse" type="CharacterBody3D"]
 script = ExtResource("1_l0tbn")
 
+[node name="Unit" type="Node" parent="."]
+script = ExtResource("3_hcpxk")
+
 [node name="Sprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0449593, 0, 0)
 texture_filter = 4
+texture = ExtResource("2_if24d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_wq0hq")
