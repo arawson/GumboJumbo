@@ -25,3 +25,7 @@ func _physics_process_collision(collision: KinematicCollision3D):
 	# queue health loss if what we hit has a health pool
 	if health_pool != null and other != origin:
 		health_pool.deal_damage(bullet_damage)
+
+
+func _physics_process_post(_delta: float):
+	pass

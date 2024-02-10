@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsxmnlirbvcwi"]
+[gd_scene load_steps=6 format=3 uid="uid://bsxmnlirbvcwi"]
 
 [ext_resource type="Script" path="res://GumboJumbo/ship/ship.gd" id="1_ujqnn"]
 [ext_resource type="Script" path="res://GumboJumbo/lib/unit.gd" id="2_6rajd"]
 [ext_resource type="Texture2D" uid="uid://cp4dsr1byoeck" path="res://gfx/space-ship-2/ship003.png" id="2_vels2"]
+[ext_resource type="Script" path="res://GumboJumbo/lib/health_pool.gd" id="3_wy6ec"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tfw7k"]
 radius = 0.0630719
@@ -13,6 +14,9 @@ script = ExtResource("1_ujqnn")
 
 [node name="Unit" type="Node" parent="."]
 script = ExtResource("2_6rajd")
+
+[node name="HealthPool" type="Node" parent="."]
+script = ExtResource("3_wy6ec")
 
 [node name="Sprite" type="Sprite3D" parent="."]
 unique_name_in_owner = true
