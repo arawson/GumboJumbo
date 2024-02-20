@@ -16,6 +16,9 @@ func _physics_process_collision(collision: KinematicCollision3D):
 	if other == null:
 		return
 	var health_pool = other.get_node("HealthPool") as HealthPool
+	var unit = other.get_node("Unit") as Unit
+	if unit == null:
+		return
 	# this is going to be either the CharacterController3D of a thing or
 	# it's going to be the StaticBody3D of the StageBoundary.
 
@@ -25,7 +28,16 @@ func _physics_process_collision(collision: KinematicCollision3D):
 	# queue health loss if what we hit has a health pool
 	if health_pool != null and other != origin:
 		health_pool.deal_damage(bullet_damage)
+	
+	# finally, delete ourselves
+	queue_free()
 
 
 func _physics_process_post(_delta: float):
 	pass
+
+
+func set_color(color: String):
+	match color:
+		"red":
+			$Sprite.animation = $Sprite.sprite_frames["red"]
