@@ -1,17 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgn14uj654k16"]
+[gd_scene load_steps=9 format=3 uid="uid://cgn14uj654k16"]
 
+[ext_resource type="Script" path="res://GumboJumbo/gumbo_jumbo.gd" id="1_kh70l"]
 [ext_resource type="Script" path="res://GumboJumbo/neutral_faction.gd" id="1_o80wt"]
+[ext_resource type="PackedScene" uid="uid://dq6tvhqcy2aps" path="res://addons/EasyMenus/Scenes/main_menu.tscn" id="1_t7u7a"]
 [ext_resource type="Script" path="res://GumboJumbo/player_faction.gd" id="2_wsq5j"]
 [ext_resource type="PackedScene" uid="uid://bsxmnlirbvcwi" path="res://GumboJumbo/ship/ship.tscn" id="3_ieeef"]
 [ext_resource type="Script" path="res://GumboJumbo/witch_faction.gd" id="4_1trhg"]
+[ext_resource type="PackedScene" uid="uid://rw7gdui8lu3n" path="res://addons/EasyMenus/Scenes/pause_menu.tscn" id="7_qbtnh"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_aoqf7"]
 height = 0.328696
 radius = 2.48528
 
 [node name="GumboJumbo" type="Node3D"]
+process_mode = 3
+script = ExtResource("1_kh70l")
 
 [node name="NeutralFaction" type="Node" parent="."]
+process_mode = 1
 script = ExtResource("1_o80wt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="NeutralFaction"]
@@ -32,6 +38,7 @@ radius = 1.63573
 sides = 32
 
 [node name="PlayerFaction" type="Node" parent="."]
+process_mode = 1
 script = ExtResource("2_wsq5j")
 
 [node name="Ship" parent="PlayerFaction" instance=ExtResource("3_ieeef")]
@@ -43,4 +50,12 @@ speed_max = 1.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.84475)
 
 [node name="WitchFaction" type="Node" parent="."]
+process_mode = 1
 script = ExtResource("4_1trhg")
+
+[node name="MainMenu" parent="." instance=ExtResource("1_t7u7a")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_qbtnh")]
+visible = false
+
+[connection signal="start_game_pressed" from="MainMenu" to="." method="_on_main_menu_start_game_pressed"]
