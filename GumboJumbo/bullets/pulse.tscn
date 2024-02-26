@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://daci5anvw0i6u" path="res://gfx/bullet-collection-1_m484/pulse-green.png" id="4_qwcuo"]
 [ext_resource type="Texture2D" uid="uid://bhbxqndatf0tx" path="res://gfx/bullet-collection-1_m484/pulse-yellow.png" id="6_37sb8"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_wq0hq"]
+radius = 0.0506049
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_0d2qn"]
 animations = [{
 "frames": [{
@@ -42,9 +45,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_wq0hq"]
-radius = 0.0506049
-
 [node name="Pulse" type="CharacterBody3D" node_paths=PackedStringArray("unit")]
 script = ExtResource("1_l0tbn")
 unit = NodePath("Unit")
@@ -52,12 +52,15 @@ unit = NodePath("Unit")
 [node name="Unit" type="Node" parent="."]
 script = ExtResource("3_hcpxk")
 
-[node name="Sprite" type="AnimatedSprite3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_wq0hq")
+
+[node name="SpriteDisplacer" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0449593, 0, 0)
+
+[node name="Sprite" type="AnimatedSprite3D" parent="SpriteDisplacer"]
+unique_name_in_owner = true
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.0251011, 0, 0)
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_0d2qn")
 animation = &"blue"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_wq0hq")

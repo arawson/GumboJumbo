@@ -1,4 +1,3 @@
-
 class_name BaseMovementController
 extends CharacterBody3D
 
@@ -35,6 +34,7 @@ func _init_internal_vectors():
 	_v_tangent = Vector3.ZERO
 	_v_tangent = (position - _y_ref).normalized().cross(Vector3(0, 1, 0))
 
+
 func _physics_process_pre_calc_helpers():
 	_init_internal_vectors()
 	_v_input = _get_desired_velocity()
@@ -55,7 +55,7 @@ func _physics_process(_delta):
 	_physics_process_bind_to_cylinder()
 
 	_physics_process_post(_delta)
-	
+
 
 func _physics_process_bind_to_cylinder():
 	var r_error = MainConstants.cylinder_radius - (_y_ref.distance_to(position))
@@ -72,9 +72,8 @@ func displace(amount: Vector2):
 
 	# but X has to be projected around the cylinder
 	var theta_0 = atan2(global_position.z, -global_position.x) - PI/2
-	print("Calculated theta_0 = %s" % theta_0)
-	var theta = amount.x / ( 2*PI*MainConstants.cylinder_radius )
-	print("Calculated theta = %s" % theta)
+	var theta = -amount.x / ( 2*PI*MainConstants.cylinder_radius )
+	print("theta_0 = %s      theta = %s" % [theta_0, theta])
 	global_position.x = MainConstants.cylinder_radius * sin(theta + theta_0)
 	global_position.z = MainConstants.cylinder_radius * cos(theta + theta_0)
 	

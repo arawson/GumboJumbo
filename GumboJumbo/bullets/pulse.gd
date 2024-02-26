@@ -5,9 +5,9 @@ extends BaseMovementController
 	get:
 		return bullet_angle
 	set(value):
-		sprite.rotate_z(bullet_angle)
+		sprite_displacer.rotate_z(bullet_angle)
 		bullet_angle = value
-		sprite.rotate_z(-(bullet_angle + PI))
+		sprite_displacer.rotate_z(-(bullet_angle + PI))
 @export var bullet_damage: int = 1
 @export var faction_id: int = -1
 @export var color: String
@@ -15,6 +15,7 @@ extends BaseMovementController
 
 
 @onready var sprite = %Sprite
+@onready var sprite_displacer = %SpriteDisplacer
 
 
 func get_size_estimate() -> Vector2:
@@ -24,13 +25,13 @@ func get_size_estimate() -> Vector2:
 func _ready():
 	match color:
 		"red":
-			$Sprite.animation = &"red"
+			sprite.animation = &"red"
 		"blue":
-			$Sprite.animation = &"blue"
+			sprite.animation = &"blue"
 		"yellow":
-			$Sprite.animation = &"yellow"
+			sprite.animation = &"yellow"
 		"green":
-			$Sprite.animation = &"green"
+			sprite.animation = &"green"
 
 
 func _get_desired_velocity() -> Vector2:
@@ -45,12 +46,6 @@ func _physics_process_collision(collision: KinematicCollision3D):
 	var other_unit = other.get_node("Unit") as Unit
 	if other_unit == null:
 		return
-
-	# this is going to be either the CharacterController3D of a thing or
-	# it's going to be the StaticBody3D of the StageBoundary.
-
-	# queue our destruction if we hit anything
-	# TODO
 
 	# queue health loss if what we hit has a health pool
 	if health_pool != null and other_unit.faction_id != faction_id:

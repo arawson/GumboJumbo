@@ -11,9 +11,10 @@
 script = ExtResource("3_fwv0d")
 scene = ExtResource("2_avyxs")
 color = "blue"
-speed_base = 1.5
+speed_base = 4.0
 damage_base = 10
 lifetime = 1.0
+cooldown = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tfw7k"]
 radius = 0.0630719

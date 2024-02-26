@@ -7,3 +7,4 @@ extends Resource
 @export var speed_base: float
 @export var damage_base: int
 @export var lifetime: float = 1.0
+@export var cooldown: float = 1.0

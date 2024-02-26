@@ -14,11 +14,9 @@ func _get_desired_velocity() -> Vector2:
 	var v_input = Vector2.ZERO
 	if Input.is_action_pressed("move_left"):
 		v_input.x += 1
-		print("set _facing = -1")
 		_facing = -1
 	if Input.is_action_pressed("move_right"):
 		v_input.x -= 1
-		print("set _facing = +1")
 		_facing = 1
 	if Input.is_action_pressed("move_up"):
 		v_input.y += 1
@@ -52,7 +50,6 @@ func _shoot_primary():
 
 	bullet.faction_id = unit.faction_id
 	bullet.color = attack_primary.color
-	print("_facing %s " % _facing)
 	bullet.speed_max = attack_primary.speed_base
 	bullet.bullet_damage = attack_primary.damage_base
 	bullet.collision_layer = collision_layer
@@ -62,14 +59,13 @@ func _shoot_primary():
 	get_parent().add_child(bullet)
 	match _facing:
 		-1:
-			print("Facing -1")
 			bullet.bullet_angle = 0
 		+1:
-			print("Facing +1")
 			bullet.bullet_angle = PI
-	bullet.displace(Vector2(-bullet_size.x, 0))
+	bullet.displace(Vector2(10*-bullet_size.x * _facing, 0))
 
 	_can_shoot = false
+	_shoot_cooldown.wait_time = attack_primary.cooldown
 	_shoot_cooldown.start()
 
 
