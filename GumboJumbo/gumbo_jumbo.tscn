@@ -15,6 +15,7 @@ radius = 2.48528
 [node name="GumboJumbo" type="Node3D"]
 process_mode = 3
 script = ExtResource("1_kh70l")
+cylinder_radius = 1.636
 
 [node name="NeutralFaction" type="Node" parent="."]
 process_mode = 1
@@ -24,6 +25,8 @@ script = ExtResource("1_o80wt")
 transform = Transform3D(1, 0, 0, 0, 0.122839, 0.992427, 0, -0.992427, 0.122839, 0, 3.07027, 1.60718)
 
 [node name="StageBoundary" type="StaticBody3D" parent="NeutralFaction"]
+collision_layer = 3
+collision_mask = 0
 
 [node name="BoundaryTop" type="CollisionShape3D" parent="NeutralFaction/StageBoundary"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16973, 0)
@@ -34,6 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.16848, 0)
 shape = SubResource("CylinderShape3D_aoqf7")
 
 [node name="CylinderStage" type="CSGCylinder3D" parent="NeutralFaction"]
+unique_name_in_owner = true
 radius = 1.63573
 sides = 32
 
@@ -43,7 +47,6 @@ script = ExtResource("2_wsq5j")
 
 [node name="Ship" parent="PlayerFaction" instance=ExtResource("3_ieeef")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.66003)
-cylinder_radius = 1.636
 speed_max = 1.0
 
 [node name="Camera3D" type="Camera3D" parent="PlayerFaction/Ship"]

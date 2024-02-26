@@ -1,16 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsxmnlirbvcwi"]
+[gd_scene load_steps=9 format=3 uid="uid://bsxmnlirbvcwi"]
 
 [ext_resource type="Script" path="res://GumboJumbo/ship/ship.gd" id="1_ujqnn"]
 [ext_resource type="Script" path="res://GumboJumbo/lib/unit.gd" id="2_6rajd"]
+[ext_resource type="PackedScene" uid="uid://dmfm6lwu4twaf" path="res://GumboJumbo/bullets/pulse.tscn" id="2_avyxs"]
 [ext_resource type="Texture2D" uid="uid://cp4dsr1byoeck" path="res://gfx/space-ship-2/ship003.png" id="2_vels2"]
+[ext_resource type="Script" path="res://GumboJumbo/lib/attack.gd" id="3_fwv0d"]
 [ext_resource type="Script" path="res://GumboJumbo/lib/health_pool.gd" id="3_wy6ec"]
+
+[sub_resource type="Resource" id="Resource_3qhj2"]
+script = ExtResource("3_fwv0d")
+scene = ExtResource("2_avyxs")
+color = "blue"
+speed_base = 1.5
+damage_base = 10
+lifetime = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tfw7k"]
 radius = 0.0630719
 height = 0.241029
 
-[node name="Ship" type="CharacterBody3D"]
+[node name="Ship" type="CharacterBody3D" node_paths=PackedStringArray("unit")]
+collision_mask = 2
 script = ExtResource("1_ujqnn")
+attack_primary = SubResource("Resource_3qhj2")
+unit = NodePath("Unit")
 
 [node name="Unit" type="Node" parent="."]
 script = ExtResource("2_6rajd")
@@ -27,3 +40,12 @@ texture = ExtResource("2_vels2")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.0127048, -0.00967576, 0)
 shape = SubResource("CapsuleShape3D_tfw7k")
+
+[node name="ShootCooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+one_shot = true
+
+[connection signal="damage_received" from="HealthPool" to="." method="_on_health_pool_damage_received"]
+[connection signal="health_depleted" from="HealthPool" to="." method="_on_health_pool_health_depleted"]
+[connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]

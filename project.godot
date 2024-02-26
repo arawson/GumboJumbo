@@ -21,6 +21,7 @@ config/icon="res://gfx/alchemy-or-witchs-cauldrons/002-alchemy-orange.png"
 
 FactionManager="*res://GumboJumbo/lib/faction_manager.gd"
 MenuTemplateManager="*res://addons/EasyMenus/Nodes/menu_template_manager.tscn"
+MainConstants="*res://GumboJumbo/lib/main_constants.gd"
 
 [input]
 
@@ -60,3 +61,8 @@ pause={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_physics/layer_1="player"
+3d_physics/layer_2="witch"

@@ -45,13 +45,15 @@ animations = [{
 [sub_resource type="SphereShape3D" id="SphereShape3D_wq0hq"]
 radius = 0.0506049
 
-[node name="Pulse" type="CharacterBody3D"]
+[node name="Pulse" type="CharacterBody3D" node_paths=PackedStringArray("unit")]
 script = ExtResource("1_l0tbn")
+unit = NodePath("Unit")
 
 [node name="Unit" type="Node" parent="."]
 script = ExtResource("3_hcpxk")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0449593, 0, 0)
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_0d2qn")

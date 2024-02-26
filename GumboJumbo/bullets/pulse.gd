@@ -1,14 +1,40 @@
 extends BaseMovementController
 
 ## in radians
-@export var bullet_angle: float = 0
-@export var bullet_speed: float = 0.1
-@export var origin: Node3D
+@export var bullet_angle: float = 0:
+	get:
+		return bullet_angle
+	set(value):
+		sprite.rotate_z(bullet_angle)
+		bullet_angle = value
+		sprite.rotate_z(-(bullet_angle + PI))
 @export var bullet_damage: int = 1
+@export var faction_id: int = -1
+@export var color: String
+@export var lifetime: float = 1
+
+
+@onready var sprite = %Sprite
+
+
+func get_size_estimate() -> Vector2:
+	return Vector2(.051 * 2.1, .051 * 2.1)
+
+
+func _ready():
+	match color:
+		"red":
+			$Sprite.animation = &"red"
+		"blue":
+			$Sprite.animation = &"blue"
+		"yellow":
+			$Sprite.animation = &"yellow"
+		"green":
+			$Sprite.animation = &"green"
 
 
 func _get_desired_velocity() -> Vector2:
-	return Vector2.from_angle(bullet_angle) * bullet_speed
+	return Vector2.from_angle(bullet_angle)
 
 
 func _physics_process_collision(collision: KinematicCollision3D):
@@ -16,9 +42,10 @@ func _physics_process_collision(collision: KinematicCollision3D):
 	if other == null:
 		return
 	var health_pool = other.get_node("HealthPool") as HealthPool
-	var unit = other.get_node("Unit") as Unit
-	if unit == null:
+	var other_unit = other.get_node("Unit") as Unit
+	if other_unit == null:
 		return
+
 	# this is going to be either the CharacterController3D of a thing or
 	# it's going to be the StaticBody3D of the StageBoundary.
 
@@ -26,18 +53,14 @@ func _physics_process_collision(collision: KinematicCollision3D):
 	# TODO
 
 	# queue health loss if what we hit has a health pool
-	if health_pool != null and other != origin:
+	if health_pool != null and other_unit.faction_id != faction_id:
 		health_pool.deal_damage(bullet_damage)
 	
 	# finally, delete ourselves
 	queue_free()
 
 
-func _physics_process_post(_delta: float):
-	pass
-
-
-func set_color(color: String):
-	match color:
-		"red":
-			$Sprite.animation = $Sprite.sprite_frames["red"]
+func _physics_process_post(delta: float):
+	lifetime -= delta
+	if lifetime <= 0:
+		queue_free()
