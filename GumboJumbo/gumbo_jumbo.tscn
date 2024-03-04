@@ -45,9 +45,10 @@ sides = 32
 process_mode = 1
 script = ExtResource("2_wsq5j")
 
-[node name="Ship" parent="PlayerFaction" instance=ExtResource("3_ieeef")]
+[node name="Ship" parent="PlayerFaction" node_paths=PackedStringArray("unit") instance=ExtResource("3_ieeef")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.66003)
 speed_max = 1.0
+unit = NodePath("Unit")
 
 [node name="Camera3D" type="Camera3D" parent="PlayerFaction/Ship"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.84475)
